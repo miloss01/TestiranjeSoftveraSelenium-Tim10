@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BookingPage {
     private WebDriver driver;
@@ -50,8 +52,14 @@ public class BookingPage {
 
     public BookingPage(WebDriver driver) {
         this.driver = driver;
-        driver.get(PAGE_URL);
+//        driver.navigate().to(PAGE_URL);
         PageFactory.initElements(driver, this);
+    }
+
+    public boolean loadPage() {
+        (new WebDriverWait(driver, 3))
+                .until(ExpectedConditions.visibilityOf(map));
+        return true;
     }
 
     public void fillDepartureTextBox(String address) {
