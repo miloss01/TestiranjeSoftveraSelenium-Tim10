@@ -28,10 +28,13 @@ public class BookRideTest extends TestBaseForBooking {
         bookingPage.clickEstimate();
         bookingPage.clickPetCheckbox();
         bookingPage.clickBook();
+        bookingPage.waitForTimeNotValid();
         takeScreenshoot(driver, "booking_time_not_selected");
+        bookingPage.closeSnackBar();
         bookingPage.clickEstimate();
         bookingPage.selectInvalidDate();
         bookingPage.clickBook();
+        bookingPage.waitForTimeNotValid();
         takeScreenshoot(driver, "booking_time_not_valid");
     }
 
@@ -44,7 +47,7 @@ public class BookRideTest extends TestBaseForBooking {
         bookingPage.clickEstimate();
         bookingPage.selectValidDate();
         bookingPage.clickBook();
-//        bookingPage.waitForPopUp();
+        bookingPage.waitForNoAvailableVehiclePopUp();
         takeScreenshoot(driver, "booking_no_vehicles");
     }
 
@@ -59,13 +62,13 @@ public class BookRideTest extends TestBaseForBooking {
         bookingPage.selectDropDown(VEHICLE_TYPE);
         bookingPage.selectValidDate();
         bookingPage.clickBook();
+        bookingPage.waitForBookingSucessfullPopUp();
         takeScreenshoot(driver, "booking_successful");
     }
 
     @Test(priority = 5)
     public void bookRideAlreadyPending() {
         BookingPage bookingPage = new BookingPage(driver);
-        takeScreenshoot(driver, "booking_no_vehicles");
         bookingPage.reloadPage();
         bookingPage.fillDepartureTextBox(DEPARTURE_ADDRESS);
         bookingPage.fillDestinationTextBox(DESTINATION_ADDRESS);
@@ -73,6 +76,7 @@ public class BookRideTest extends TestBaseForBooking {
         bookingPage.selectDropDown(VEHICLE_TYPE);
         bookingPage.selectValidDate();
         bookingPage.clickBook();
+        bookingPage.waitForRidePendingPopUp();
         takeScreenshoot(driver, "booking_ride_already_pending");
     }
 }

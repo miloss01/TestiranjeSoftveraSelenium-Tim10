@@ -7,11 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.security.Key;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -99,7 +96,7 @@ public class BookingPage {
     }
 
     public void clickEstimate() {
-        (new WebDriverWait(driver, 3))
+        (new WebDriverWait(driver, 20))
                 .until(ExpectedConditions.elementToBeClickable(estimateButton)).click();
         System.out.println(estimatedPriceLabel.getText());
         (new WebDriverWait(driver, 7))
@@ -193,15 +190,34 @@ public class BookingPage {
                 .until(ExpectedConditions.elementToBeClickable(swalOkButton)).click();
     }
 
-    public void exitSwalPopUp2() {
+    public void waitForNoAvailableVehiclePopUp() {
         (new WebDriverWait(driver, 3))
-                .until(ExpectedConditions.visibilityOf(swalOkButtonRideAccepted));
-        (new WebDriverWait(driver, 3))
-                .until(ExpectedConditions.elementToBeClickable(swalOkButtonRideAccepted)).click();
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(., \"Booking failed :(\")]")));
+//        (new WebDriverWait(driver, 3))
+//                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[contains(., \"OK\")]")));
+//        (new WebDriverWait(driver, 3))
+//                .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(., \"OK\")]")));
     }
 
-    public void waitForPopUp() {
+    public void waitForBookingSucessfullPopUp() {
         (new WebDriverWait(driver, 3))
-                .until(ExpectedConditions.stalenessOf(swalOkButton));
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[starts-with(., \"Driver has been appointed.\")]")));
+    }
+
+    public void waitForRidePendingPopUp() {
+        (new WebDriverWait(driver, 3))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(., \"Oops...\")]")));
+    }
+
+    public void waitForTimeNotValid() {
+        (new WebDriverWait(driver, 3))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(., \"Time not valid\")]")));
+        (new WebDriverWait(driver, 3))
+                .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(., \"Close\")]")));
+    }
+
+    public void closeSnackBar() {
+        (new WebDriverWait(driver, 3))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[contains(., \"Close\")]"))).click();
     }
 }
