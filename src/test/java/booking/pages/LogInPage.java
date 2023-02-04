@@ -20,6 +20,9 @@ public class LogInPage {
     @FindBy(xpath = "//form/button[contains(., \"Log in\")]")
     WebElement logInButton;
 
+    @FindBy(tagName = "p")
+    WebElement errorMessage;
+
     public LogInPage(WebDriver driver) {
         this.driver = driver;
 //        driver.navigate().to(PAGE_URL);
@@ -27,6 +30,7 @@ public class LogInPage {
     }
 
     public void fillUsername(String username) {
+        usernameField.clear();
         (new WebDriverWait(driver, 3))
                 .until(ExpectedConditions.elementToBeClickable(usernameField)).clear();
         usernameField.sendKeys(username);
@@ -41,5 +45,11 @@ public class LogInPage {
         System.out.println(logInButton.getText());
         (new WebDriverWait(driver, 3))
                 .until(ExpectedConditions.elementToBeClickable(logInButton)).click();
+    }
+
+    public Boolean checkErrorMessageText(String text) {
+        (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.textToBePresentInElement(errorMessage, text));
+        return true;
     }
 }

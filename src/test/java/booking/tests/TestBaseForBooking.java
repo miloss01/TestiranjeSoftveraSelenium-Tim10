@@ -4,6 +4,7 @@ import booking.pages.LandingPage;
 import booking.pages.LogInPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
@@ -17,6 +18,8 @@ public class TestBaseForBooking {
 
         driver.manage().window().maximize();
         LandingPage landingPage = new LandingPage(driver);
+        landingPage.goToLandingPage();
+        Assert.assertTrue(landingPage.loadPage());
         landingPage.clickLogin();
         LogInPage logInPage = new LogInPage(driver);
         logInPage.fillUsername("nana@DEsi.com");
