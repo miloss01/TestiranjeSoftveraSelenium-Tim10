@@ -14,7 +14,10 @@ public class LandingPage {
     @FindBy(tagName = "app-map")
     WebElement map;
 
-    @FindBy(xpath = "//span[contains(., \"Log in\")]")
+    @FindBy(css = "p.form-title")
+    WebElement formTitle;
+
+    @FindBy(xpath = "//button[contains(., \"Log in\")]")
     WebElement logInButton;
 
     @FindBy(xpath = "//button[contains(., \" Log out \")]")
@@ -37,7 +40,7 @@ public class LandingPage {
 
     public boolean loadPage() {
         (new WebDriverWait(driver, 3))
-                .until(ExpectedConditions.visibilityOf(map));
+                .until(ExpectedConditions.visibilityOf(formTitle));
         return true;
     }
 

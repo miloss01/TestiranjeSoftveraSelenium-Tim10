@@ -15,19 +15,26 @@ public class LogInTest {
     private LogInPage logInPage;
 
     @BeforeSuite
-    public void initializeWebDriver() {
+    public void initializeWebDriver() throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-    }
-
-    @BeforeMethod
-    public void openLogInPage() {
         landingPage = new LandingPage(driver);
         landingPage.goToLandingPage();
         Assert.assertTrue(landingPage.loadPage());
         landingPage.clickLogin();
         logInPage = new LogInPage(driver);
+        Assert.assertTrue(logInPage.loadPage());
+//        Thread.sleep(2 * 1000);
+    }
+
+    @BeforeMethod
+    public void openLogInPage() {
+//        landingPage = new LandingPage(driver);
+//        landingPage.goToLandingPage();
+//        Assert.assertTrue(landingPage.loadPage());
+        landingPage.clickLogin();
+//        logInPage = new LogInPage(driver);
     }
 
     @Test

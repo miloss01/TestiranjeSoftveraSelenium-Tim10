@@ -11,6 +11,9 @@ public class LogInPage {
     private WebDriver driver;
 //    private static String PAGE_URL="http://localhost:4200";
 
+    @FindBy(xpath = "//h3[contains(., \"Log in\")]")
+    WebElement title;
+
     @FindBy(name = "username")
     WebElement usernameField;
 
@@ -27,6 +30,12 @@ public class LogInPage {
         this.driver = driver;
 //        driver.navigate().to(PAGE_URL);
         PageFactory.initElements(driver, this);
+    }
+
+    public boolean loadPage() {
+        (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.visibilityOf(title));
+        return true;
     }
 
     public void fillUsername(String username) {
