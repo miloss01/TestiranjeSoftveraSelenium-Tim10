@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-public class TestBaseForExecutingRide {
+public class TestBaseForEndRideAndLoadAccepted {
 
     public static WebDriver driver;
 
@@ -20,7 +20,7 @@ public class TestBaseForExecutingRide {
         LandingPage landingPage = new LandingPage(driver);
         landingPage.clickLogin();
         LogInPage logInPage = new LogInPage(driver);
-        logInPage.fillUsername("testExecuteSelenium@DEsi.com");
+        logInPage.fillUsername("testEndSelenium@DEsi.com");
         logInPage.fillPassword("333");
         logInPage.commenceLogin();
 

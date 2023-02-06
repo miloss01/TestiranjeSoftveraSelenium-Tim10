@@ -92,9 +92,10 @@ public class CurrentRidePage {
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1[contains(., \"No ride currently in progress.\")]")));
     }
 
-    public void waitForAcceptedRide() {
+    public boolean waitForAcceptedRide() {
         (new WebDriverWait(driver, 3))
                 .until(ExpectedConditions.presenceOfElementLocated(By.id("start-ride-btn")));
+        return true;
     }
 
     public void waitForActiveRide() {
