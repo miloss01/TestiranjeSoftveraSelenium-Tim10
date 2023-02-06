@@ -12,6 +12,9 @@ public class BookRideTest extends TestBaseForBooking {
     static final String FRIEND_NAME = "full name";
     static final String VEHICLE_TYPE = "Luxury";
 
+    static final String VEHICLE_TYPE_NO_VEHICLES = "Van";
+
+
     @Test(priority=1)
     public void bookRideWithNoAddress() {
         BookingPage bookingPage = new BookingPage(driver);
@@ -46,6 +49,7 @@ public class BookRideTest extends TestBaseForBooking {
         bookingPage.fillDestinationTextBox(DESTINATION_ADDRESS);
         bookingPage.clickEstimate();
         bookingPage.selectValidDate();
+        bookingPage.selectDropDown(VEHICLE_TYPE_NO_VEHICLES);
         bookingPage.clickBook();
         bookingPage.waitForNoAvailableVehiclePopUp();
         takeScreenshoot(driver, "booking_no_vehicles");
