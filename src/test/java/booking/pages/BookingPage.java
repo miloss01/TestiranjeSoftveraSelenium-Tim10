@@ -34,8 +34,6 @@ public class BookingPage {
     @FindBy(id = "inv-btn")
     WebElement inviteFriendsDialog;
 
-//    @FindBy(tagName = "button")
-//    WebElement inviteButton;
 //
 //    @FindBy(css = "button[style=\"background-color: #24ED80;\"]")
 //    WebElement cancelButton;
@@ -219,5 +217,23 @@ public class BookingPage {
     public void closeSnackBar() {
         (new WebDriverWait(driver, 3))
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[contains(., \"Close\")]"))).click();
+    }
+
+    public void openFriendsDialog() {
+        inviteFriendsDialog.click();
+    }
+
+    public void inviteFriend(String friend) {
+        (new WebDriverWait(driver, 3))
+            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type=\"email\"]"))).sendKeys(friend);
+        (new WebDriverWait(driver, 3))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[contains(., \"Invite\")]")));
+        (new WebDriverWait(driver, 3))
+                .until(ExpectedConditions.elementToBeClickable(By.xpath("//mat-dialog-container//button[contains(., \"Invite\")]"))).click();
+    }
+
+    public void closeFriendsDialog() {
+        (new WebDriverWait(driver, 3))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[contains(., \"Cancel\")]"))).click();
     }
 }

@@ -65,6 +65,10 @@ public class BookRideTest extends TestBaseForBooking {
         bookingPage.clickEstimate();
         bookingPage.selectDropDown(VEHICLE_TYPE);
         bookingPage.selectValidDate();
+        bookingPage.openFriendsDialog();
+        bookingPage.inviteFriend("nana@DEsi.com");
+        takeScreenshoot(driver, "booking_ride_friend");
+        bookingPage.closeFriendsDialog();
         bookingPage.clickBook();
         bookingPage.waitForBookingSucessfullPopUp();
         takeScreenshoot(driver, "booking_successful");
